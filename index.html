@@ -88,8 +88,18 @@
           /* White */
         }
       </style>
+      <!-- Avatar and Sign-Out Button -->
+      <div id="userInfo" style="display: none; align-items: center; gap: 10px;">
+        <img id="avatar" src="assets/img/humanavatar.png" alt="User Avatar"
+          style="width: 40px; height: 40px; border-radius: 50%;">
+        <span id="usernameDisplay" style="font-weight: bold;"></span>
+        <button id="signOutButton"
+          style="padding: 5px 10px; border: none; background-color: #f44336; color: white; border-radius: 5px; cursor: pointer;">Sign
+          Out</button>
+      </div>
 
-      <a href="login.html" class="login-button">Login</a>
+      <!-- Login Button -->
+      <a href="login.html" id="loginButton" class="login-button">Login</a>
 
     </div>
   </header>
@@ -258,7 +268,35 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
-
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const storedUsername = localStorage.getItem("username");
+    const userInfo = document.getElementById("userInfo");
+    const usernameDisplay = document.getElementById("usernameDisplay");
+    const loginButton = document.getElementById("loginButton");
+    console.log(storedUsername);
+    if (storedUsername) {
+      // User is logged in
+      usernameDisplay.textContent = storedUsername;
+      userInfo.style.display = "flex"; // Show avatar and sign-out button
+      loginButton.style.display = "none"; // Hide login button
+    } else {
+      // User is not logged in
+      userInfo.style.display = "none";
+      loginButton.style.display = "block";
+    }
+  
+    // Handle sign-out
+    document.getElementById("signOutButton").addEventListener("click", () => {
+      localStorage.removeItem("username"); // Remove username from localStorage
+      window.location.reload(); // Refresh the page to reset UI
+    });
+  });
+  document.getElementById("avatar").addEventListener("click", () => {
+  window.location.href = "user.html";
+});
+  </script>
+  
 </body>
 
 </html>
