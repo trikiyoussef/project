@@ -8,7 +8,7 @@ try {
         $username = $_GET['username'];
 
         // Fetch user details from the database
-        $sql = "SELECT username, email, password, FROM user WHERE username = :username";
+        $sql = "SELECT username, email, password, role FROM user WHERE username = :username";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([':username' => $username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);

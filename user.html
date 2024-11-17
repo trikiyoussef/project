@@ -217,6 +217,36 @@
     })
     .catch(error => alert("An error occurred: " + error));
 });
+// Handle form submission for updating user details
+document.getElementById("userForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+
+    // Include the username in the request (read-only field in the form)
+    formData.append("username", document.getElementById("username").value);
+
+    fetch("update_user.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then(response => response.json())
+      .then(data => {
+        const message = document.getElementById("message");
+        if (data.status === "success") {
+          message.textContent = "User details updated successfully";
+          message.style.color = "green";
+        } else {
+          message.textContent = data.message || "Failed to update user details.";
+          message.style.color = "#f44336"; // Red for error
+        }
+      })
+      .catch(error => {
+        const message = document.getElementById("message");
+        message.textContent = "An error occurred: " + error;
+        message.style.color = "#f44336"; // Red for error
+      });
+  });
   </script>
 </body>
 </html>
