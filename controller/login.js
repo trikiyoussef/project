@@ -12,7 +12,7 @@ function toggleForms() {
   
     try {
       // Send the form data to login.php
-      const response = await fetch('login.php', {
+      const response = await fetch('../controller/login.php', {
         method: 'POST',
         body: formData
       });
@@ -25,7 +25,7 @@ function toggleForms() {
         localStorage.setItem('username', result.username);
   
         // Redirect to the homepage
-        window.location.href = "index.html";
+        window.location.href = "../index.html";
       } else {
         // Show an error message
         alert(result.message || 'Login failed. Please try again.');
@@ -73,7 +73,7 @@ function toggleForms() {
     if (isValid) {
   
       try {
-        const response = await fetch("register.php", {
+        const response = await fetch("../controller/register.php", {
           method: "POST",
           body: formData,
         });
@@ -82,7 +82,7 @@ function toggleForms() {
         console.log(data);
         if (data.status === "success") {
           localStorage.setItem("username", data.username);
-          window.location.href = "index.html";
+          window.location.href = "../index.html";
         } else {
           alert("Registration failed. Please try again.");
         }

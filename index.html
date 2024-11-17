@@ -99,7 +99,7 @@
       </div>
 
       <!-- Login Button -->
-      <a href="login.html" id="loginButton" class="login-button">Login</a>
+      <a href="./view/login.html" id="loginButton" class="login-button">Login</a>
 
     </div>
   </header>
@@ -268,34 +268,8 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-    const storedUsername = localStorage.getItem("username");
-    const userInfo = document.getElementById("userInfo");
-    const usernameDisplay = document.getElementById("usernameDisplay");
-    const loginButton = document.getElementById("loginButton");
-    console.log(storedUsername);
-    if (storedUsername) {
-      // User is logged in
-      usernameDisplay.textContent = storedUsername;
-      userInfo.style.display = "flex"; // Show avatar and sign-out button
-      loginButton.style.display = "none"; // Hide login button
-    } else {
-      // User is not logged in
-      userInfo.style.display = "none";
-      loginButton.style.display = "block";
-    }
+  <script src="./controller/index.js"></script>
   
-    // Handle sign-out
-    document.getElementById("signOutButton").addEventListener("click", () => {
-      localStorage.removeItem("username"); // Remove username from localStorage
-      window.location.reload(); // Refresh the page to reset UI
-    });
-  });
-  document.getElementById("avatar").addEventListener("click", () => {
-  window.location.href = "user.html";
-});
-  </script>
   
 </body>
 
