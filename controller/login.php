@@ -1,5 +1,5 @@
 <?php
-require 'init.php';
+require '../config.php';
 
 try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

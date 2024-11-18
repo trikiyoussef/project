@@ -1,6 +1,6 @@
 <?php
 
-require 'init.php'; // Include your database connection setup
+require '../config.php';
 
 try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

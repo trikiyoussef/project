@@ -1,8 +1,7 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-require 'init.php'; // Include your database connection setup
-
+require '../config.php';
 try {
     if (isset($_GET['username'])) {
         $username = $_GET['username'];
