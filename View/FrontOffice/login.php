@@ -1,6 +1,6 @@
 <?php
 
-include(__DIR__ . '/../Controller/UserController.php');
+include(__DIR__ . '/../../Controller/UserController.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $action = $_POST['action'];

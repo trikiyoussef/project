@@ -1,6 +1,6 @@
 <?php
 session_start();
-include(__DIR__ . '/../Controller/UserController.php');
+include(__DIR__ . '/../../Controller/UserController.php');
 
 $controller = new UserController();
 
