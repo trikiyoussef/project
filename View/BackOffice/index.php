@@ -56,24 +56,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $controller->addUser($newUser);
     $message = "New user added successfully!";
 
-  } elseif (isset($_POST['edit_user']) && $isAdmin) {
-    // Edit user details (admin only)
-    $userIdToEdit = $_POST['user_id'];
-    $newUsername = $_POST['edit_username'];
-    $newEmail = $_POST['edit_email'];
-
-    // Fetch the user to edit
-    $userToEdit = $controller->getUser($userIdToEdit);
-    $updatedUser = new User(
-      $userToEdit['id'],
-      $newUsername,
-      $newEmail,
-      $userToEdit['password'], // Keep the existing password
-      $userToEdit['role'] // Keep the existing role
-    );
-    $controller->updateUser($updatedUser, $userIdToEdit);
-    $message = "User updated successfully!";
-    $activeSection = 'community';
+    
+  }elseif (isset($_POST['edit_user']) && $isAdmin) {
+      // Fetch input
+      $userIdToEdit = $_POST['user_id'];
+      $newUsername = trim($_POST['edit_username']);
+      $newEmail = trim($_POST['edit_email']);
+  
+      // Server-side validation
+      $errors = [];
+  
+      // Validate username
+      if (strlen($newUsername) < 3) {
+        $errors[] = "Username must be at least 3 characters long.";
+      }
+  
+      // Validate email
+      if (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Please provide a valid email address.";
+      }
+  
+      // If there are errors, return to the form with an error message
+      if (!empty($errors)) {
+        echo "<script>alert('" . implode("\\n", array_map('addslashes', $errors)) ."');</script>";
+        echo "<script>window.location.href='index.php?section=community';</script>";
+        exit();
+      }
+  
+      // If no errors, proceed with updating the user
+      $userToEdit = $controller->getUser($userIdToEdit);
+      $updatedUser = new User(
+        $userToEdit['id'],
+        $newUsername,
+        $newEmail,
+        $userToEdit['password'], // Keep the existing password
+        $userToEdit['role'] // Keep the existing role
+      );
+  
+      $controller->updateUser($updatedUser, $userIdToEdit);
+      $_SESSION['success_message'] = "User updated successfully!";
+      header("Location: index.php?section=community");
+      exit();
+  
   } elseif (isset($_POST['update_profile'])) {
     // Collect new data
     $newUsername = $_POST['username'];
@@ -387,7 +411,7 @@ $allUsers = $isAdmin ? $controller->getUsers() : [];
                     <input type="text" name="edit_username" value="<?= htmlspecialchars($user['username']) ?>" required>
                   </td>
                   <td>
-                    <input type="email" name="edit_email" value="<?= htmlspecialchars($user['email']) ?>" required>
+                    <input type="text" name="edit_email" value="<?= htmlspecialchars($user['email']) ?>" required>
                   </td>
                   <td><?= htmlspecialchars($user['role']) ?></td>
                   <td>
@@ -410,7 +434,7 @@ $allUsers = $isAdmin ? $controller->getUsers() : [];
         <form method="POST" action="index.php?section=community" class="add-user">
           <h3>Add New User</h3>
           <input type="text" name="new_username" placeholder="Username" required>
-          <input type="email" name="new_email" placeholder="Email" required>
+          <input type="text" name="new_email" placeholder="Email" required>
           <input type="password" name="new_password" placeholder="Password" required>
           <select name="new_role" required>
             <option value="user">User</option>
@@ -458,6 +482,7 @@ $allUsers = $isAdmin ? $controller->getUsers() : [];
       });
     });
   </script>
+  <script src="validation.js"></script>
 </body>
 
 </html>

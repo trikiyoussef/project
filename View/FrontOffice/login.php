@@ -192,7 +192,7 @@ function register()
       <!-- Username input -->
       <input type="hidden" name="action" value="register">
       <input type="text" name="username" placeholder="Username" required>
-
+      <span class="error" id="username-error"></span>
       <!-- Email input -->
       <input type="text" name="email" id="email" placeholder="Email" required>
       <span class="error" id="email-error"></span>
