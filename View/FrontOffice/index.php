@@ -67,6 +67,15 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
       gap: 10px;
     }
 
+    #profile {
+      display: inline-block;
+      /* Ensures the anchor wraps tightly around the image */
+      width: 40px;
+      /* Matches the image width */
+      height: 40px;
+      /* Matches the image height */
+    }
+
     #userInfo img {
       width: 40px;
       height: 40px;
@@ -116,16 +125,22 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
       <!-- User Info or Login Button -->
       <?php if ($isLoggedIn): ?>
         <div id="userInfo">
-          <img src="assets/img/humanavatar.png" alt="User Avatar">
-          <span>
-            <?= htmlspecialchars($id) ?>
-          </span>
-          <a href="user.php" class="btn btn-primary">Profile</a>
+          <?php if (isset($_SESSION['role']) && $_SESSION['role'] ==='admin' ): ?>
+            <a href="../BackOffice/index.php" id="profile">
+              <img src="assets/img/humanavatar.png" alt="User Avatar">
+              </a>
+              <?php else: ?>
+                <a href="user.php" id="profile">
+              <img src="assets/img/humanavatar.png" alt="User Avatar">
+              </a>
+          <?php endif; ?>
           <a href="index.php?action=logout" id="signOutButton">Sign Out</a>
         </div>
       <?php else: ?>
+
         <a href="login.php" id="loginButton" class="login-button">Login</a>
-      <?php endif; ?>
+      
+        <?php endif; ?>
     </div>
   </header>
 
@@ -133,29 +148,156 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
 
     <!-- Hero Section -->
     <section id="hero" class="hero section">
+
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-6 text-center" data-aos="fade-up" data-aos-delay="100">
-            <h2>Welcome to <span class="underlight">Heritage Tunisie</span></h2>
-            <p>Discover the wonders of Tunisia's history and culture.</p>
-            <a href="contact.html" class="btn-get-started">Contact Us</a>
+            <h2><span>In </span><span class="underlight">Heritage Tunisie</span></h2>
+            <p> we are committed to preserving and enhancing Tunisia's cultural heritage, ensuring its legacy thrives
+              for generations to come.</p>
+            <a href="#" class="btn-get-started">Join Us in Preservation<br></a>
           </div>
         </div>
       </div>
-    </section>
-    
+
+    </section><!-- /Hero Section -->
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery section">
+
+      <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4 justify-content-center">
+
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-1.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/gallery-1.jpg" title="Gallery 1" class="glightbox preview-link"><i
+                    class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/gallery-2.jpg" title="Gallery 2" class="glightbox preview-link"><i
+                    class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-3.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/gallery-3.jpg" title="Gallery 3" class="glightbox preview-link"><i
+                    class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-4.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/gallery-4.jpg" title="Gallery 4" class="glightbox preview-link"><i
+                    class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-5.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/gallery-5.jpg" title="Gallery 5" class="glightbox preview-link"><i
+                    class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-6.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/gallery-6.jpg" title="Gallery 6" class="glightbox preview-link"><i
+                    class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-7.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/gallery-7.jpg" title="Gallery 7" class="glightbox preview-link"><i
+                    class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/gallery-8-2.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/gallery-8-2.jpg" title="Gallery 8" class="glightbox preview-link"><i
+                    class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Gallery Section -->
 
   </main>
 
   <footer id="footer" class="footer">
+
     <div class="container">
       <div class="copyright text-center ">
         <p>© <span>Copyright</span> <strong class="px-1 sitename">Heritage Tunisie</strong> <span>All Rights
             Reserved</span>
         </p>
       </div>
+      <div class="social-links d-flex justify-content-center">
+        <a href=""><i class="bi bi-twitter-x"></i></a>
+        <a href=""><i class="bi bi-facebook"></i></a>
+        <a href=""><i class="bi bi-instagram"></i></a>
+        <a href=""><i class="bi bi-linkedin"></i></a>
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="#">WebSynergy</a>
+      </div>
     </div>
+
   </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="line"></div>
+  </div>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

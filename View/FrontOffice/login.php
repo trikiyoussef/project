@@ -24,6 +24,7 @@ function login()
       // Successful login
       session_start();
       $_SESSION['id'] = $user['id'];
+      $_SESSION['role'] = $user['role'];
       //header('Location: ./index.php');
       echo '<script>
       alert("You are logged in successfully.");
